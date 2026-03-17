@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WealthTrack | Advanced SIP & Goal Planner</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="dark-theme">
+
+    <header class="settings-header">
+        <div class="logo">WealthTrack</div>
+        <div class="settings-group">
+            <span class="settings-label">Appearance</span>
+            <label class="switch">
+                <input type="checkbox" id="themeCheckbox" checked>
+                <span class="slider-toggle round"></span>
+            </label>
+        </div>
+    </header>
+
+    <div class="dashboard-container">
+        <aside class="column calculator-col">
+            <div class="calculator-card">
+                <div class="mode-selector">
+                    <button id="sipModeBtn" class="mode-btn active">SIP Calculator</button>
+                    <button id="goalModeBtn" class="mode-btn">Goal Planner</button>
+                </div>
+                
+                <div class="control">
+                    <div class="label-row">
+                        <label id="primaryLabel">Monthly Investment</label>
+                        <div class="input-wrapper">
+                            <span>₹</span>
+                            <input type="number" id="primaryInput" value="5000">
+                        </div>
+                    </div>
+                    <input type="range" id="primarySlider" min="500" max="100000" step="500" value="5000">
+                </div>
+
+                <div class="control">
+                    <div class="label-row">
+                        <label>Expected Return Rate (p.a)</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="rateInput" value="12" step="0.1">
+                            <span>%</span>
+                        </div>
+                    </div>
+                    <input type="range" id="rateSlider" min="1" max="30" step="0.1" value="12">
+                </div>
+
+                <div class="control">
+                    <div class="label-row">
+                        <label>Time Period (Years)</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="yrInput" value="10">
+                        </div>
+                    </div>
+                    <input type="range" id="yrSlider" min="1" max="40" value="10">
+                </div>
+
+                <div class="control" id="stepUpContainer">
+                    <div class="label-row">
+                        <label>Annual Step-up (%)</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="stepInput" value="10">
+                            <span>%</span>
+                        </div>
+                    </div>
+                    <input type="range" id="stepSlider" min="0" max="25" value="10">
+                </div>
+            </div>
+
+            <div class="referral-box">
+                <button id="investBtn" class="referral-link">
+                    Sign up to invest
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </button>
+            </div>
+        </aside>
+
+        <section class="column chart-col">
+            <div class="viz-card">
+                <div class="chart-box">
+                    <canvas id="sipChart"></canvas>
+                    <div class="chart-overlay">
+                        <small id="overlayLabel">Total Wealth</small>
+                        <h2 id="totalValueDisplay">₹0</h2>
+                    </div>
+                </div>
+                <div class="final-stats">
+                    <div class="stat-item">
+                        <small id="statLabelLeft">Invested</small>
+                        <p id="statValueLeft">₹0</p>
+                    </div>
+                    <div class="stat-item">
+                        <small id="statLabelRight">Total Returns</small>
+                        <p id="statValueRight">₹0</p>
+                    </div>
+                </div>
+
+                <div class="what-if-card">
+                    <div class="what-if-header">
+                        <span class="icon">☕</span>
+                        <h4>The Coffee Factor</h4>
+                    </div>
+                    <p>What if you invested your daily small expense instead of spending it?</p>
+                    <div class="what-if-input-row">
+                        <span>Daily Spend: ₹</span>
+                        <input type="number" id="dailySpendInput" value="200">
+                    </div>
+                    <div class="what-if-result">
+                        <small>Potential Wealth in 30 Years (at 12%)</small>
+                        <h3 id="coffeeResult">₹0</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <main class="column growth-col">
+            <div class="table-card">
+                <div class="table-header">
+                    <h4>Growth Projection</h4>
+                </div>
+                <div class="table-scroll">
+                    <table id="growthTable">
+                        <thead>
+                            <tr>
+                                <th>Year</th>
+                                <th>Invested</th>
+                                <th>Wealth</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody"></tbody>
+                    </table>
+                </div>
+                
+                <div class="milestones-container">
+                    <h5>🏆 Financial Milestones</h5>
+                    <div id="milestoneList" class="milestone-list"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+<script src="script.js"></script>
+</body>
+</html>
