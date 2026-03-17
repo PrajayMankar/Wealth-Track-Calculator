@@ -125,7 +125,7 @@ themeCheckbox.onchange = () => {
     sipChart.update();
 };
 
-// SECRET REDIRECT LOGIC
+// Masked Click Logic
 investBtn.onclick = () => {
     window.open("https://upstox.onelink.me/0H1s/27AMU7", "_blank");
 };
